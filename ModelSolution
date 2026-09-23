@@ -1,0 +1,45 @@
+import random
+
+secret_number = -1
+
+MIN = 0
+MAX = 100 
+guesses = 0
+
+
+def setup():
+    global secret_number
+    secret_number = random.randint(MIN, MAX)
+
+def ask(num):
+    global secret_number, guesses
+    guesses += 1
+
+    print(f"Je gokte {num}.")
+
+    if(num < secret_number):
+        print("hoger")
+        return "hoger"
+    elif(num > secret_number):
+        print("lager")
+        return "lager"
+    else:
+        print(f"Het geheime getal was {secret_number}.")
+        print(f"Je deed er {guesses} gokken over.")
+        return "correct"
+    
+
+setup()
+
+l = MIN
+r = MAX
+while True:
+    mid = (l+r)//2
+    res = ask(mid)
+    if(res == "correct"):
+        break
+    elif(res == "lager"):
+        r = mid-1
+    else:
+        l = mid+1
+    
